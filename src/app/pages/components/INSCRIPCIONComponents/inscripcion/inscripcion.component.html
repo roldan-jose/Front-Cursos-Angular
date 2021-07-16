@@ -1,0 +1,86 @@
+<app-navbar></app-navbar>
+<div class="container-lg">
+    <h1 class="mt-2 text-center">Alumnos Inscritos</h1>
+    <div class="container mt-5">
+        <p class="fs-5 fw-bold">Busqueda de Materias Inscritas</p>
+        <form autocomplete="off" [formGroup]="formBusqueda" (ngSubmit)="Buscar()">
+            <div class="row g-3">
+                <div class="col">
+                    <label class="form-label">ID Periodo</label>
+                    <select class="form-select" aria-label="Default select example" formControlName="idPeriodo" [class]="isValidForm('idPeriodo')">
+                        <option selected>Elige ID Periodo ...</option>
+                        <option *ngFor="let item of periodoId|objectData">{{item.idPeriodo}}</option>
+                      </select>
+                    <div class="invalid-feedback"><span *ngIf="formBusqueda.get('idPeriodo').errors?.required">Este campo es obligatorio.</span></div>
+                </div>
+                <div class="col">
+                    <label class="form-label">ID Estudiante</label>
+                    <select class="form-select" aria-label="Default select example" formControlName="idEstudiante" [class]="isValidForm('idEstudiante')">
+                        <option selected value="">Elige ID Estudiante ...</option>
+                        <option value="{{item.idEstudiante}}" *ngFor="let item of estudianteID|objectData">{{item.idEstudiante}} - {{item.nombreApellido}}</option>
+                      </select>
+                    <div class="invalid-feedback"><span *ngIf="formBusqueda.get('idEstudiante').errors?.required">Este campo es obligatorio.</span></div>
+                </div>
+                <div class="col">
+                    <div class="d-grid gap-2 mt-2">
+                        <button class="btn btn-outline-secondary mt-4" type="submit"><i class="fa fa-search" aria-hidden="true"></i>  → Buscar ← </button>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="container mt-4">
+        <p class="fs-6 fw-bold">Total de Inscripciones por Busqueda</p>
+        <table class="table table-secondary table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">Código de Materia</th>
+                    <th scope="col">Nombre de la Materia</th>
+                    <th scope="col">Año</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of periodoCurso|objectData">
+                    <td>{{item.codigo}}</td>
+                    <td>{{item.descripcion}}</td>
+                    <td>{{item.fecha|date: 'mediumDate'}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <div class="container mt-4">
+        <p class="fs-6 fw-bold">Total de Alumnos Inscritos</p>
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th scope="col">ID Estudiante</th>
+                    <th scope="col">ID Periodo</th>
+                    <th scope="col">ID Materia</th>
+                    <th scope="col">Código de Materia</th>
+                    <th scope="col">Nombre de la Materia</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let item of inscripcionData|objectData">
+                    <td>{{item.idEstudiante}}</td>
+                    <td>
+                        <a *ngFor="let i of item|objectData">
+                            <td>{{i.idPeriodo}}</td>
+                        </a>
+                    </td>
+                    <td>
+                        <a *ngFor="let i of item|objectData">
+                            <td>{{i.idCurso}}</td>
+                        </a>
+                    </td>
+                    <td>{{item.codigo}}</td>
+                    <td>
+                        <a *ngFor="let i of item|objectData">
+                            <td>{{i.descripcion}}</td>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

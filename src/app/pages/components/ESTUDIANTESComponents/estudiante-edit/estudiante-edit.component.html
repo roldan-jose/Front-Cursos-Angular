@@ -1,0 +1,72 @@
+<app-navbar></app-navbar>
+<div class="container-xxl">
+    <h1 style="text-align: center;">Estudiante <small>{{DataEstuidante.nombre}}</small></h1>
+
+    <div class="row mt-5">
+        <div class="col-md-2 offset-md-8">
+            <button routerLink="/estudiantes" type="button" class="btn btn-outline-danger btn-lg"><i class="fas fa-undo-alt "></i> Regresar</button>
+        </div>
+    </div>
+
+    <div class="row mt-1 animated fadeIn align-items-center justify-content-lg-center">
+        <div class="col-sm-7 shadow-lg p-3 mb-5 bg-light rounded">
+            <form autocomplete="off" (ngSubmit)="Guardar(nombre, apellido, codigo, fechaNacimiento)" #f="ngForm">
+                <div class="card" style="width: 13rem">
+                    <img [src]="photoSelected || DataEstuidante.urlImagenEstudiante" (click)="InputImages.click()" class="card-img-top">
+                    <div class="card-body">
+                        <h6 class="card-title">Estudiante: <small>{{DataEstuidante.nombre}}</small></h6>
+                        <div class="mb-1">
+                            <!-- formControlName="ImagenEstudiante"  formControlName="IdEstudiante"  [(ngModel)]="DataEstuidante.urlImagenEstudiante" #ImagenEstudianteDto="ngModel" -->
+                            <input class="form-control form-control-sm" name="ImagenEstudianteDto" id="formFileSm" (change)="CapturarFile($event)" type="file" #InputImages>
+                        </div>
+                    </div>
+                </div>
+                <div class="mb-3 mt-3">
+                    <label class="form-label ">AutoGenerate ID</label>
+                    <input type="text" name="IdEstudiante" [attr.disabled]="true" class="form-control" [(ngModel)]="DataEstuidante.idEstudiante" #idEstudiante="ngModel">
+                    <small class="form-text text-muted ">Campo Generado Automáticamente Por el Servidor</small>
+                </div>
+                <div class="row g-3">
+                    <div class="col">
+                        <label class="form-label">Nombre(s)</label>
+                        <!-- [class.is-invalid]="nombreNoValido" -->
+                        <input type="text" name="Nombre" class="form-control" placeholder="Nombre(s)" aria-label="First name" required minlength="4" [class.is-invalid]="Nombre.invalid && Nombre.touched" [(ngModel)]="DataEstuidante.nombre" #Nombre="ngModel" #nombre>
+                        <div *ngIf="Nombre.invalid && Nombre.touched" class="invalid-feedback">Ingresa Un Nombre Con Más De 3 Carácteres</div>
+                    </div>
+                    <div class="col">
+                        <label class="form-label">Apellidos</label>
+                        <input type="text" name="Apellidos" class="form-control" placeholder="Apellido Paterno & Apellido Materno" aria-label="Last name" required minlength="6" [class.is-invalid]="Apellidos.invalid && Apellidos.touched" [(ngModel)]="DataEstuidante.apellido"
+                            #Apellidos="ngModel" #apellido>
+                        <div *ngIf="Apellidos.invalid && Apellidos.touched" class="invalid-feedback">Ingresa Los Apellidos Con Más De 5 Carácteres</div>
+                    </div>
+                </div>
+                <div class="mb-3 ">
+                    <label class="form-label">Nombre Completo</label>
+                    <input type="text" class="form-control" [attr.disabled]="true" name="Napellido" [(ngModel)]="DataEstuidante.nombreApellido" #Napellidos="ngModel">
+                    <small class="form-text text-muted ">Campo Generado Automáticamente Por el Servidor</small>
+                </div>
+                <div class="row g-3">
+                    <div class="col">
+                        <label class="form-label">Código</label>
+                        <input type="text" class="form-control" placeholder="Código del estudiante" aria-label="First name" name="Codigo" required minlength="8" maxlength="8" [class.is-invalid]="Codigo.invalid && Codigo.touched" [(ngModel)]="DataEstuidante.codigo" #Codigo="ngModel"
+                            #codigo>
+                        <div *ngIf="Codigo.invalid && Codigo.touched" class="invalid-feedback">Ingresa Un Código Con Mínimo 8 Carácteres y Máximo 8 Carácteres</div>
+                    </div>
+                    <div class="col">
+                        <label class="form-label">Fecha de Nacimiento</label>
+                        <input type="date | text" class="form-control" placeholder="Fecha de nacimiento del estudiante" aria-label="Last name" name="Fecha" required [class.is-invalid]="Fecha.invalid && Fecha.touched" [ngModel]="DataEstuidante.fechaNacimiento | date: 'd/MM/y'"
+                            (ngModel)="DataEstuidante.fechaNacimiento" #Fecha="ngModel" #fechaNacimiento>
+                        <div *ngIf="Fecha.invalid && Fecha.touched" class="invalid-feedback">Ingresa El Formato "dd/mm/aaaa"</div>
+                    </div>
+                </div>
+
+
+                <hr style="border: 2px solid #0275d8; ">
+                <div class="d-grid gap-2">
+                    <button type="submit" class="btn btn-outline-primary"><i class="far fa-save "></i> Guardar</button>
+                </div>
+
+            </form>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,54 @@
+<div class="container w-100 BG mb-1 mt-1 rounded shadow">
+    <div class="row align-items-stretch animated fadeIn">
+        <div class="col Bg-Img d-none d-lg-block col-md-5 col-lg-5 col-xl-6 rounded-3">
+
+        </div>
+        <div class="col bg-white p-2 rounded-end">
+            <div class="text-end">
+                <img src="../../../assets/img/neutron.svg" width="48" alt="">
+            </div>
+
+            <h2 class="fw-bold pt-3 mb-3 text-center">Inicio de Sesión</h2>
+            <form class="mt-4" autocomplete="off" [formGroup]="FormLogIn" (ngSubmit)="OnLogIn()">
+                <div class="form-floating mb-4">
+                    <input type="email" class="form-control rounded-pill border border-success is-invalid" id="floatingInput" placeholder="example@abc.co" formControlName="email" [class.is-invalid]="UsuarioInvalid" required>
+                    <label for="floatingInput">Correo Electrónico</label>
+                    <small *ngIf="UsuarioInvalid" class="form-text text-danger"> Ingresa Un Correo Electónico Valido.</small>
+                </div>
+                <div class="form-floating mb-4">
+                    <input type="password" class="form-control rounded-pill border border-success is-invalid" id="floatingInput2" placeholder="Ingresa tu contraseña" formControlName="password" [class.is-invalid]="PassInvalid" required>
+                    <label for="floatingInput2">Contraseña</label>
+                    <small *ngIf="PassInvalid" class="form-text text-danger">Ingresa más de 4 cáracteres.</small>
+                </div>
+                <div class="form-check mb-4">
+                    <input class="form-check-input border-success" type="checkbox" value="" id="flexCheckIndeterminate">
+                    <label class="form-check-label" for="flexCheckIndeterminate">  Recordar usuario</label>
+                </div>
+                <div class="d-grid">
+                    <button [disabled]="FormLogIn.invalid" type="submit" class="btn btn-outline-success" name="button">Iniciar Sesión</button>
+                </div>
+                <div class="my-4">
+                    <span><strong>¿Aún No Tienes Cuenta? </strong><a routerLink="/register" class="link-success"> ¡Registrate Ahora! <i class="fas fa-long-arrow-alt-right"></i></a></span>
+                </div>
+            </form>
+            <!-- Inicio de sesión con redes sociales -->
+            <div class="container w-100 my-5">
+                <div class="row text-center">
+                    <div class="col-12">
+                        <h4>Inicia Sesión Con Plataformas Sociales</h4>
+                    </div>
+                </div>
+                <div class="row mt-2">
+                    <div class="col">
+                        <ul class="social-content align-items-center">
+                            <li (click)="RedesSocialesProxim()"><img src="../../../assets/img/facebook.png"></li>
+                            <li (click)="RedesSocialesProxim()"><img src="../../../assets/img/twitter.png"></li>
+                            <li (click)="RedesSocialesProxim()"><img src="../../../assets/img/instagram.png"></li>
+                            <li (click)="RedesSocialesProxim()"><img src="../../../assets/img/telegram.png"></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

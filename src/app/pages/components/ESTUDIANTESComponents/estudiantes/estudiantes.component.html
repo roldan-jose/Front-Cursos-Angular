@@ -1,0 +1,44 @@
+<app-navbar></app-navbar>
+<div class="container-lg">
+    <h1 class="mt-2">Listado de Estudiantes</h1>
+    <div class="row mt-5">
+        <div class="col text-right">
+            <button routerLink="/estudiante/nuevo" class="btn btn-outline-primary btn-lg"><i class="fas fa-plus"></i> Agregar Estudiante</button>
+        </div>
+    </div>
+    <table *ngIf="estudianteC" class="table mt-2 animated fadeIn">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Código</th>
+                <th scope="col">Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Nombre Completo</th>
+                <th scope="col">Fecha de Nacimiento</th>
+                <th scope="col">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of estudianteC">
+                <th scope="row">{{item.idEstudiante}}</th>
+                <td>{{item.codigo}}</td>
+                <td>{{item.nombre}}</td>
+                <td>{{item.apellido}}</td>
+                <td>{{item.nombreApellido}}</td>
+                <td>{{item.fechaNacimiento | date:'mediumDate'}}</td>
+                <td>
+                    <!-- routerLink="/estudiante-show/nuevo" -->
+                    <button type="button" class="btn btn-outline-warning mr-1" (click)="ShowEstudiante(item.idEstudiante)"><i class="far fa-eye"></i></button>
+                    <button type="button" class="btn btn-outline-info" (click)="EditEstudiante(item.idEstudiante)"><i class="fas fa-user-edit"></i></button>
+                    <button type="button" class="btn btn-outline-danger" (click)="EliminarEstudiante(item.idEstudiante)"><i class="fas fa-user-times"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <div *ngIf="!estudianteC" class="alert alert-warning text-center mt-3 animated fadeIn" role="alert">
+        <h4 class="alert-heading">No Hay Registro Alguno</h4>
+        <p>
+            <i class="fas fa-exclamation-triangle fa-3x"></i>
+        </p>
+    </div>
+</div>

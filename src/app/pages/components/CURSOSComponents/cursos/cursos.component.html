@@ -1,0 +1,36 @@
+<app-navbar></app-navbar>
+<div class="container-lg">
+    <h1 class="mt-2">Listado De Cursos</h1>
+    <div class="row mt-5">
+        <div class="col text-right">
+            <button routerLink="/cursos-nuevo/nuevo" class="btn btn-outline-primary btn-lg"><i class="fas fa-plus"></i> Agregar Curso</button>
+        </div>
+    </div>
+    <table class="table mt-2 animated fadeIn">
+        <thead class="thead-dark">
+            <tr>
+                <th scope="col">ID</th>
+                <th scope="col">Código</th>
+                <th scope="col">Descripción</th>
+                <th scope="col">Estado</th>
+                <th scope="col">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let item of cursos$">
+                <th scope="row">{{ item.idCurso }}</th>
+                <td>{{ item.codigo }}</td>
+                <td>{{ item.descripcion }}</td>
+                <td>
+                    <span *ngIf="item.estado" class="badge rounded-pill bg-secondary">Activo</span>
+                    <span *ngIf="!item.estado" class="badge rounded-pill bg-dark">Inactivo</span>
+                </td>
+                <td>
+                    <!-- routerLink="/estudiante-show/nuevo" -->
+                    <button type="button" class="btn btn-outline-info" (click)="EditCurso(item.idCurso)"><i class="fas fa-user-edit"></i></button>
+                    <button type="button" class="btn btn-outline-danger" (click)="BorrrarCurso(item.idCurso)"><i class="fas fa-user-times"></i></button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</div>

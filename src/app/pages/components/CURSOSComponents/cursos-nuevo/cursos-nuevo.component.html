@@ -1,0 +1,50 @@
+<app-navbar></app-navbar>
+<div class="container-xxl">
+    <h1 class="text-center mt-3">Nuevo Curso</h1>
+
+    <div class="row mt-5">
+        <div class="col-md-2 offset-md-8">
+            <button routerLink="/cursos" type="button" class="btn btn-outline-danger btn-lg"><i class="fas fa-undo-alt "></i> Regresar</button>
+        </div>
+    </div>
+
+    <div class="row mt-1 animated fadeIn align-items-center justify-content-lg-center">
+        <div class="col-sm-7 shadow-lg p-3 mb-5 bg-light rounded">
+            <form autocomplete="off" [formGroup]="formCursoN" (ngSubmit)="Guardar()">
+                <div class="row g-3">
+                    <div class="col">
+                        <label class="form-label">ID Curso</label>
+                        <input type="text" name="id" class="form-control" placeholder="p. ej. 2008" aria-label="First name" formControlName="id" [class]="isValidForm('id')">
+                        <div class="invalid-feedback"><span *ngIf="formCursoN.get('id').errors?.required">Este campo es obligatorio.</span></div>
+                        <div class="invalid-feedback"><span *ngIf="formCursoN.get('id').errors?.minlength">Minímo {{ formCursoN.get('id').errors?.minlength?.requiredLength }} Carácteres.</span></div>
+                        <div class="invalid-feedback"><span *ngIf="formCursoN.get('id').errors?.maxlength">Maxímo {{ formCursoN.get('id').errors?.maxlength?.requiredLength }} Carácteres.</span></div>
+                        <!-- <div *ngIf="Nombre.invalid && Nombre.touched" class="invalid-feedback">Ingresa Un Nombre Con Más De 3 Carácteres</div> -->
+                    </div>
+                    <div class="col">
+                        <label class="form-label">Código</label>
+                        <input type="text" name="codigo" class="form-control" placeholder="p. ej. 10Cx24A" aria-label="Last name" formControlName="codigo" [class]="isValidForm('codigo')">
+                        <!-- <div *ngIf="Apellido.invalid && Apellido.touched" class="invalid-feedback">Ingresa Los Apllidos Con Más De 5 Carácteres</div> -->
+                        <div class="invalid-feedback"><span *ngIf="formCursoN.get('codigo').errors?.required">Este campo es obligatorio.</span></div>
+                        <div class="invalid-feedback"><span *ngIf="formCursoN.get('codigo').errors?.minlength">Ingresa Un Código Con Minímo De {{ formCursoN.get('codigo').errors?.minlength?.requiredLength }} Carácteres.</span></div>
+                        <div class="invalid-feedback"><span *ngIf="formCursoN.get('codigo').errors?.maxlength">Maxímo {{ formCursoN.get('codigo').errors?.maxlength?.requiredLength }} Carácteres.</span></div>
+                    </div>
+                </div>
+                <div class="mb-3 mt-2">
+                    <label class="form-label">Nombre De La Materia</label>
+                    <input type="text" name="descripcion" class="form-control" placeholder="P. ej. Matematicas II" formControlName="nombreMat" [class]="isValidForm('nombreMat')">
+                    <div class="invalid-feedback"><span *ngIf="formCursoN.get('nombreMat').errors?.required">Este campo es obligatorio.</span></div>
+                    <div class="invalid-feedback"><span *ngIf="formCursoN.get('nombreMat').errors?.minlength">Ingresa Un Nombre Con Minímo De {{ formCursoN.get('nombreMat').errors?.minlength?.requiredLength }} Carácteres.</span></div>
+                </div>
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" checked formControlName="estado">
+                    <label class="form-check-label" for="flexSwitchCheckChecked">Curso Inactivo / Curso Activo</label>
+                </div>
+
+                <hr style="border: 2px solid #0275d8; ">
+                <div class="d-grid gap-2">
+                    <button type="submit" [disabled]="formCursoN.invalid" class="btn btn-outline-primary"><i class="far fa-save"></i> Guardar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
